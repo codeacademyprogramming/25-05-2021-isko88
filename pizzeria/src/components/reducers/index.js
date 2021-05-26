@@ -25,7 +25,8 @@ function todoProduct(state = initProduct, action) {
                     image: action.payload.image,
                     price: action.payload.price
                 }
-                state.Carts.push(cart);
+                let newCart = state.Carts.concat(cart);
+                setState({ Carts: newCart })
             }
             else {
                 let check = false;
@@ -43,7 +44,9 @@ function todoProduct(state = initProduct, action) {
                         image: action.payload.image,
                         price: action.payload.price
                     }
-                    state.Carts.push(_cart);
+
+                    let newCart = state.Carts.concat(_cart);
+                    setState({ Carts: newCart })
                 }
             }
             return {
