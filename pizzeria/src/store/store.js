@@ -11,3 +11,7 @@ function loggerMiddleware(storeAPI) {
         }
     }
 }
+
+const middlewares = applyMiddleware(loggerMiddleware);
+const store = createStore(reducer,middlewares);
+export default store;
