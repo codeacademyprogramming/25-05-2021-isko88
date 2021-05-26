@@ -12,6 +12,13 @@ function loggerMiddleware(storeAPI) {
     }
 }
 
-const middlewares = applyMiddleware(loggerMiddleware);
-const store = createStore(reducer,middlewares);
+const logger = storeAPI => next => action => {
+    console.log("Store before action dispatch:", storeAPI.getState());
+    console.log("Action dispatch:", action);
+    const result =  next(action);
+    return result;
+}
+
+const middlewares = applyMiddleware(loggerMiddleware,logger);
+const store = createStore(reducer, middlewares);
 export default store;
