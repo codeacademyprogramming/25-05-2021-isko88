@@ -5,7 +5,7 @@ const initProduct = {
     _products: []
 }
 
-function todoProduct(state = initProduct, action) {
+function Product(state = initProduct, action) {
     switch (action.type) {
         case "GET_ALL_PRODUCT":
             return {
@@ -25,8 +25,9 @@ function todoProduct(state = initProduct, action) {
                     image: action.payload.image,
                     price: action.payload.price
                 }
-                let newCart = state.Carts.concat(cart);
-                setState({ Carts: newCart })
+                setState(prevState => ({
+                    Carts: [...prevState.Carts, cart]
+                  }))
             }
             else {
                 let check = false;
@@ -45,8 +46,9 @@ function todoProduct(state = initProduct, action) {
                         price: action.payload.price
                     }
 
-                    let newCart = state.Carts.concat(_cart);
-                    setState({ Carts: newCart })
+                    setState(prevState => ({
+                        Carts: [...prevState.Carts, _cart]
+                      }))
                 }
             }
             return {
