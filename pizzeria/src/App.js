@@ -1,18 +1,12 @@
 import './App.scss';
-import { TopSection } from "./components/TopSection";
-import { Items } from "./components/Items";
-import { Basket } from "./components/Basket"
-
+import Basket from './Components/Basket';
+import Products from './Components/Products';
 
 function App() {
-  return (
-
-    <div>
-      <TopSection />
-      <Basket />
-      <Items />
-    </div>
-  );
+  return <>
+    <Products />
+    <Basket />
+  </>
 }
 
 export default App;

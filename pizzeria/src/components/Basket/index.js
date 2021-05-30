@@ -1,24 +1,34 @@
-import React from 'react'
-import basketicon from "../../images/icons/basket-icon.svg"
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import BasketItem from './BasketItem';
 
-export const Basket = () => {
+ function Basket() {
+const [openBasket, setOpenBasket] = useState(false);
+const handleClickBasket = React.useCallback(()=>{
+    if (openBasket) {
+        setOpenBasket(false);
+    }else{
+        setOpenBasket(true);
+    }
+    
+
+})
+    const { items } = useSelector(state => state.basketReducer);
+
     return (
-        <section id="basket">
-            <div class="basket-right">
-                <div class="basket-icon">
-                    <img src={basketicon} alt="Basket icon" />
-                </div>
-                <div class="inner-basket">
-                    <h4>Your Cart</h4>
-                    <div id="bin">
-                    </div>
-                    <div class="bottom-details">
-                        <h4>Subtotal (<span id="subtotal"></span> Items)</h4>
-                        <div class="total-price"><span></span></div>
-                        <button class="checkout-btn">Checkout</button>
-                    </div>
-                </div>
+        <div className="cart" id="cart">
+            <div className="basket-icon">
+                <button onClick={handleClickBasket}><i className="fas fa-shopping-bag"></i></button>
             </div>
-        </section>
+            
+           {openBasket && ( <div className="cart-content" id="cart-content">
+                {items.map((item,idx) =>
+                    <BasketItem product={item} key={idx} />
+                )}
+                {items.length < 1 ? <span>Basket is empty</span> : ""}
+            </div>)}
+        </div>
     )
 }
+
+export default Basket
